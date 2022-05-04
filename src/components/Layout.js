@@ -6,9 +6,13 @@ import { useSelector } from "react-redux";
 import "./Layout.css";
 
 const Layout = () => {
-  let total = 100;
+  let total = 0;
+  const itemList = useSelector((state) => state.cart.itemList);
   const showCart = useSelector((state) => state.cart.showCart);
 
+  itemList.forEach((item) => {
+    total += item.price * item.quantity;
+  });
   return (
     <React.Fragment>
       <div className="layout">
