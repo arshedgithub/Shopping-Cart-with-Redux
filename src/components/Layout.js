@@ -13,7 +13,7 @@ const Layout = () => {
         <div className="total-price">
           <h3>Total: ${total}</h3>
           <button className="orderBtn">Place Order</button>
-        </div>{" "}
+        </div>
       </div>
     </React.Fragment>
   );
