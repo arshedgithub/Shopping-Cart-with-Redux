@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import "./App.css";
+import Notification from "./components/Notification";
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const sendRequest = async () => {
@@ -25,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      <Notification type={"success"} message={"dummy message"} />
       {!isLoggedIn && <Auth />}
       {isLoggedIn && <Layout />}
     </div>
