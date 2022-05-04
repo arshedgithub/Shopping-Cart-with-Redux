@@ -33,7 +33,9 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       state.itemList.filter((item) => item.id === itemId);
     },
-    setShowCart() {},
+    setShowCart(state) {
+      state.showCart = !state.showCart;
+    },
   },
 });
 

@@ -1,19 +1,29 @@
 import React from "react";
 import CartItem from "./CartItem";
-import "./Cart.css";
 import { useSelector } from "react-redux";
+import "./Cart.css";
 
 const CartItems = () => {
   const cartItems = useSelector((state) => state.cart.itemList);
+  console.log(cartItems);
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
       <ul>
-        {cartItems.map((item) => (
-          <li key={item.id}>
-            <CartItem id={item.id} price={item.price} name={item.name} />
-          </li>
-        ))}
+        {cartItems.map((item) => {
+          const { name, price, quantity, id, totalPrice } = item;
+          return (
+            <li key={id}>
+              <CartItem
+                id={id}
+                price={price}
+                name={name}
+                quantity={quantity}
+                total={totalPrice}
+              />
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
