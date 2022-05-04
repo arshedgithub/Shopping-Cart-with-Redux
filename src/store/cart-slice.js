@@ -27,8 +27,12 @@ const cartSlice = createSlice({
           name: newItem.name,
         });
       }
+      state.totalQuantity++;
     },
-    removeFromCart() {},
+    removeFromCart(state, action) {
+      const itemId = action.payload;
+      state.itemList.filter((item) => item.id === itemId);
+    },
     setShowCart() {},
   },
 });
