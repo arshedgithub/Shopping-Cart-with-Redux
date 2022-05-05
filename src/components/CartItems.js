@@ -5,7 +5,7 @@ import "./Cart.css";
 
 const CartItems = () => {
   const cartItems = useSelector((state) => state.cart.itemList);
-  console.log(cartItems);
+
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
