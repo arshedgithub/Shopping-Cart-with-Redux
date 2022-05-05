@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uiActions } from "./ui-slice";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -8,6 +9,10 @@ const cartSlice = createSlice({
     showCart: false,
   },
   reducers: {
+    replaceData(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.itemList = action.payload.itemList;
+    },
     addToCart(state, action) {
       const newItem = action.payload;
       //   to check the item is already available

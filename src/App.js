@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import Notification from "./components/Notification";
-import { uiActions } from "./store/ui-slice";
+import { fetchData, sendCartData } from "./store/cart-actions";
 import "./App.css";
 
 let isFirstRender = true;
@@ -16,49 +16,16 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isFirstRender) {
       isFirstRender = false;
       return;
     }
-    // sending state as sending request
-    dispatch(
-      uiActions.showNotification({
-        open: true,
-        message: "Sending Request",
-        type: "warning",
-      })
-    );
-
-    const sendRequest = async () => {
-      const res = await fetch(
-        "https://redux-shopping-cart-a8a49-default-rtdb.firebaseio.com/cartItems.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-      const data = await res.json();
-      // sending state as request is successful
-      dispatch(
-        uiActions.showNotification({
-          open: true,
-          message: "Sent request to Database successfully",
-          type: "success",
-        })
-      );
-    };
-
-    sendRequest().catch((err) =>
-      // send state as an eror
-      dispatch(
-        uiActions.showNotification({
-          open: true,
-          message: "Sending Request failed",
-          type: "error",
-        })
-      )
-    );
-  }, [cart]);
+    dispatch(sendCartData(cart));
+  }, [cart, dispatch]);
 
   return (
     <div className="App">
